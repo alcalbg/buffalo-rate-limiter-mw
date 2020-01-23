@@ -24,3 +24,9 @@ maxRequestsPerSecond = 5
 app.Use(limiter.Limiter(maxRequestsPerSecond, IPLookups))
 ```
 
+If you need throttling on a grouped routes then:
+```
+auth := app.Group("/auth")
+auth.Use(limiter.Limiter(5, []string{"CF-Connecting-Ip"}))
+auth.GET("/login", AuthNew)
+```
