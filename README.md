@@ -15,8 +15,8 @@ limiter "github.com/alcalbg/buffalo-rate-limiter-mw"
 
 // List of places to look up IP addresses
 // If your application is behind a proxy, set "X-Forwarded-For" first
-// If you use CloudFlare set "CF-Connecting-Ip" first  
-IPLookups = []string{"RemoteAddr", "X-Forwarded-For", "X-Real-IP"}
+// If you use CloudFlare, set "CF-Connecting-Ip" first  
+IPLookups := []string{"RemoteAddr", "X-Forwarded-For", "X-Real-IP"}
 
 // Maximum 5 requests per second
 maxRequestsPerSecond = 5

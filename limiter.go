@@ -17,7 +17,7 @@ func Limiter(maxPerSecond float64, IPLookups []string) buffalo.MiddlewareFunc {
 			httpError := tollbooth.LimitByRequest(lmt, c.Response(), c.Request())
 			if httpError != nil {
 				lmt.ExecOnLimitReached(c.Response(), c.Request())
-				return c.Redirect(401, "")
+				return c.Render(429, nil)
 			}
 			return next(c)
 		}
