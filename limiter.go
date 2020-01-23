@@ -3,15 +3,15 @@ package limiter
 import (
 	"time"
 
-	"github.com/alcalbg/buffalo"
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
+	"github.com/gobuffalo/buffalo"
 )
 
-// LimitHandler is a middleware that performs request rate-limiting on max per second basis
-func Limiter(maxPerSecond float64) buffalo.MiddlewareFunc {
+// Limiter is a middleware that performs rate-limiting
+func Limiter(maxPerSecond float64, IPLookups []string) buffalo.MiddlewareFunc {
 	lmt := tollbooth.NewLimiter(maxPerSecond, &limiter.ExpirableOptions{DefaultExpirationTTL: time.Hour})
-	lmt.SetIPLookups([]string{"CF-Connecting-Ip", "X-Forwarded-For", "RemoteAddr", "X-Real-IP"})
+	lmt.SetIPLookups(IPLookups)
 	return func(next buffalo.Handler) buffalo.Handler {
 		return func(c buffalo.Context) error {
 			httpError := tollbooth.LimitByRequest(lmt, c.Response(), c.Request())
