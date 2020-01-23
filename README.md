@@ -1,5 +1,5 @@
-## Buffalo rate-limiter
-Rate-limiter Middleware for Buffalo based on https://github.com/didip/tollbooth
+# Buffalo rate-limiter
+Rate-limiter middleware for [buffalo](https://gobuffalo.io) based on [didip/tollbooth](https://github.com/didip/tollbooth)
 
 ## Usage and config
 Add the middleware in your App() like this:
